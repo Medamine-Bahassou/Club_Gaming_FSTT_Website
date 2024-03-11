@@ -33,7 +33,10 @@
                     $_SESSION['email'] = $user['email'];
                     $_SESSION['date_naissance'] = $user['date_naissance'];
                     $_SESSION['password'] = $user['password'];
-                    
+                    if(isset($_POST['check'])){
+                        setcookie('email' , $_SESSION['email'] , time()+10 , null , null , false , true);
+                        setcookie('password' , $_SESSION['password'] , time()+10 , null , null , false , true);
+                    }
                     header("Location: ../home/home.php");
                 } else {
                     //  echo "Incorrect password <br>";
@@ -80,15 +83,18 @@
 
             <div class="input-box">
                 <i class='bx bxs-user'></i>
-                <input type="email" placeholder="Email" name="email">
+                <input type="email" placeholder="Email" name="email" value="<?php if(isset($_COOKIE['email'])) echo $_COOKIE['email']; ?>">
 
             </div>
 
             <div class="input-box">
                 <i class='bx bxs-lock-alt'></i>
-                <input type="password" placeholder="Password" name="password">
+                <input type="password" placeholder="Password" name="password" value="<?php if(isset($_COOKIE['password'])) echo $_COOKIE['password']; ?>">
             </div>
             <p class="erro"><?php echo @$emailerr; ?></p>
+            <div class="m-3">
+                <input class="me-2" type="checkbox" name="check"><label for="check">Remember me</label>
+            </div>
 
             <button class="login-btn" type="submit" name="login" value="login">Login</button>
 
