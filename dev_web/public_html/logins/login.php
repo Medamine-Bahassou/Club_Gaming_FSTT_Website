@@ -34,8 +34,8 @@
                     $_SESSION['date_naissance'] = $user['date_naissance'];
                     $_SESSION['password'] = $user['password'];
                     if(isset($_POST['check'])){
-                        setcookie('email' , $_SESSION['email'] , time()+10 , null , null , false , true);
-                        setcookie('password' , $_SESSION['password'] , time()+10 , null , null , false , true);
+                        setcookie('email' , $_SESSION['email'] , time()+10 , null , null , false , true); // 10 seconde 
+                        setcookie('password' , $_SESSION['password'] , time()+10 , null , null , false , true); // 10 seconde 
                     }
                     header("Location: ../home/home.php");
                 } else {
