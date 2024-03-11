@@ -1,0 +1,104 @@
+<?php
+
+    session_start();
+
+    $servername = "localhost";
+    $username = "root";
+    $password = "root";
+
+    
+        try {
+            $conn = new PDO("mysql:host=$servername;dbname=utilisateur", $username, "");
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            // echo "Connected successfully <br>";
+        } catch (PDOException $e) {
+            echo "Connection failed: <br> " . $e->getMessage();
+        }
+        
+
+        if (isset($_POST["login"])) {
+            $email = $_POST['email'];
+            $password1 = $_POST['password'];
+            
+            
+            $query = $conn->prepare("SELECT * FROM user WHERE email = :email");
+            $query->bindParam(':email', $email);
+            $query->execute();
+            $user = $query->fetch(PDO::FETCH_ASSOC);
+            if ($user) {
+                if ($password1 == $user['password']) {
+                    // echo "Login successful. Welcome, " . $user['nom'] . "<br>";
+                    $_SESSION['nom'] = $user['nom'];
+                    $_SESSION['prenom'] = $user['prenom'];
+                    $_SESSION['email'] = $user['email'];
+                    $_SESSION['date_naissance'] = $user['date_naissance'];
+                    $_SESSION['password'] = $user['password'];
+                    
+                    header("Location: ../home/home.php");
+                } else {
+                    //  echo "Incorrect password <br>";
+                    $emailerr = "Incorrect password";
+                }
+            } else {
+                $emailerr = "User n'existe pas";
+            }
+            
+        }
+    
+
+    ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="shortcut icon" href="../logo/fstgaming.png" />
+    <style>
+        .erro {
+            color: #FF0000;
+        }
+    </style>
+</head>
+
+
+
+<body style="height: 100vh; background-color:black; background-image:url(../img/cover.jpg);">
+
+    
+
+    <div class="login">
+
+        <form action="login.php" class="login-form rounded-5" method="post">
+            <h1 class="login-title">Login</h1>
+
+            <div class="input-box">
+                <i class='bx bxs-user'></i>
+                <input type="email" placeholder="Email" name="email">
+
+            </div>
+
+            <div class="input-box">
+                <i class='bx bxs-lock-alt'></i>
+                <input type="password" placeholder="Password" name="password">
+            </div>
+            <p class="erro"><?php echo @$emailerr; ?></p>
+
+            <button class="login-btn" type="submit" name="login" value="login">Login</button>
+
+            <p class="register">
+                Don't have an account?
+                <a href="inscription.php">Register</a>
+            </p>
+        </form>
+    </div>
+
+</body>
+
+</html>

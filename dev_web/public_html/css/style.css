@@ -1,0 +1,318 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    font-family: 'Poppins';
+}
+/*  */
+
+.carousel .list .item .buttons{
+    display: grid;
+    grid-template-columns: repeat(2, 130px);
+    grid-template-rows: 40px;
+    gap: 5px;
+    margin-top: 20px;
+}
+.carousel .list .item .buttons button{
+    border: none;
+    background-color: #eee;
+    letter-spacing: 3px;
+    font-family: Poppins;
+    font-weight: 500;
+}
+.carousel .list .item .buttons button:nth-child(2){
+    background-color: transparent;
+    border: 1px solid #fff;
+    color:#eee;
+}
+
+/*  */
+
+
+/* style de type title */
+.cont{
+    display: inline-block;
+}
+.wrapper {
+    height: 100vh;
+    /*This part is important for centering*/
+    display: grid;
+    place-items: center;
+  }
+  
+  .typing-demo {
+    width: 5.5ch;
+    animation: typing 1s steps(6), blink .5s step-end infinite alternate;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid;
+    font-family: monospace;
+  }
+  
+  @keyframes typing {
+    from {
+      width: 0
+    }
+  }
+      
+  @keyframes blink {
+    50% {
+      border-color: transparent
+    }
+  }
+
+
+
+
+/*  */
+.title {
+    font-family: "Chakra Petch", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  .font2 {
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400px;
+    font-style: normal;
+  }
+
+  .pixel {
+    font-family: "Silkscreen", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+
+
+
+  .ten {
+    font-size:34px; font-weight:500; text-transform:uppercase;
+  }
+  .ten:before {
+      background-color: #0062ff;
+      border-radius: 0.25rem;
+      content: '';
+      display: block;
+      height: 0.25rem;
+      width: 42px;
+      margin-bottom: 1.25rem;
+  }
+  
+
+.a{
+    
+    background-color: #172C4E;
+    border:2px solid yellow;
+    height: 200px;
+    width: 50%;
+    transform: skew(-15deg,0deg);
+}
+
+.titre{
+    padding:50px;
+    width:50%;
+    text-align:left;
+    margin-bottom:5%; 
+    border-radius:20px ;
+    position: relative;
+    
+    border : 2px solid white; 
+    background-image: linear-gradient(180deg ,#4077FF 0.1%,rgba(255, 255, 255, 0)), linear-gradient(90deg , #4077FF,rgba(255, 255, 255, 0)),url(https://t4.ftcdn.net/jpg/02/89/78/17/360_F_289781730_0OJWSY2pS9Q69KT4g2pr5liE8dmW9CL0.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+
+/**/
+
+.button-87 {
+  margin: 10px;
+  padding: 15px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: block;
+  border: 0px;
+  font-weight: 700;
+  box-shadow: 0px 0px 14px -7px #1976f0;
+  background-image: linear-gradient(45deg, #2f89ff 0%, #19a1f0  51%, #2f5fff  100%);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  text-decoration: none;
+}
+
+.button-87:hover {
+  background-position: right center;
+  /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.button-87:active {
+  transform: scale(0.95);
+}
+
+/**/
+
+
+
+.section-about{
+    padding-top: 100px;
+    padding-bottom: 100px;
+    background-image: linear-gradient(#244a958c 2%,#244a95 90%) ;
+    box-shadow: 0 10px 100px 120px #244a958c ;
+  }
+.section{
+    padding-top: 100px;
+}
+
+.center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.home{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+
+
+
+.cover{
+    background-color: black;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.background{
+    background-image: url(../img/back.jpg);
+    background-attachment: fixed;
+    background-size:cover;   
+    backdrop-filter: blur(5px);
+    padding: 0;
+}
+
+.blur{
+    backdrop-filter: blur(10px);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+@media (max-width:900px) {
+    .tel{
+        padding-top: 100px;
+    }
+}
+
+
+.login-button{
+    background-color: rgba(255, 0, 0, 0);
+    border: rgb(0, 119, 255) solid 2px ; 
+    font-size: 1cqmax;
+    padding: 8px 20px;
+    border-radius: 50px ; 
+    color :  white ; 
+    text-decoration: none;
+    font-weight: bolder;
+    transition: .3s;
+    margin-left: 20px;
+}
+
+
+.login-button:hover{
+    border: rgb(0, 119, 255) solid 2px;
+    background-color: rgb(0, 119, 255) ;
+    font-weight: bolder;
+}
+
+.nav-link{
+    color: white;
+    font-weight: 500;
+    position: relative;
+}
+
+
+.nav-link::before{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color:rgb(0, 119, 255) ;
+    visibility: hidden;
+    transition: 0.3s ease-in-out;
+}
+
+.nav-link:hover::before, .nav-link.active::before{
+    width: 100%;
+    visibility: visible;
+    
+}
+
+
+
+.bg-blur{
+    backdrop-filter: blur(10px);
+}
+
+
+.item-logo{
+    animation-name: item-logo;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+
+}
+/* event start */
+  .background-event{
+    background-image: url("../img/1600w-QUVVB5lzUWo.webp");
+    background-attachment: fixed;
+    background-size:cover;   
+    backdrop-filter: blur(5px);
+    height: 100vh;
+    padding: 0;
+  }
+  .cards{
+    box-shadow: rgba(222, 218, 218, 0.373) 0px 54px 55px, rgba(255, 255, 255, 0.499) 0px -12px 30px, rgba(255, 255, 255, 0.652) 0px 4px 6px, rgba(207, 199, 199, 0.59) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    transition: 0.02s ease;
+
+  }
+  .cards:hover{
+    transform: scale(1.09);
+  }
+
+/* event end */
+@keyframes item-logo {
+    0%{
+        translate: 0 0px;
+    }
+    50%{
+        translate: 0 -10px;
+    }
+    80%{
+        translate: 0 -10;
+    }
+    100%{
+        translate: 0 0 ; 
+    }
+
+}
