@@ -78,7 +78,7 @@
                   <h5 class="card-title text text-warning display-8 pixel hide" style="display:none;">Date de creation</h5>
                   <p class="card-text text text-white hide" style="display:none;"> 2024/22/10</p>
                 </div>
-                <button class="button-87 mb-4 w-75 rounded-pill activeBtn" style="bottom: 0;">Show more</button> >
+                <button class="button-87 mb-4 w-75 rounded-pill activeBtn" style="bottom: 0;">Show more</button> 
                 <button class="button-87 mb-4 w-75 rounded-pill hideBtn" style="bottom: 0;display:none ;">>Hide</button>
 
               </div>
@@ -103,21 +103,22 @@
           <!-- list group -->
           <div class="row">
             <div class="col-md-6 mb-5 ">
-              <div class="list-group rounded-5">
+              <div class="list-group rounded-5 ">
               <?php
-                      include '../bdd/utilisateur.php';
+                include '../bdd/utilisateur.php';
 
                 $news = $conn->prepare("SELECT COUNT(*) FROM news");
                 $news->execute();
                 $news_count = $news->fetchColumn();
-                for($i=1;$i<=10;$i++){
-                  while($news_count){
-                    $requete = $conn->prepare("SELECT * FROM news WHERE id=$news_count") ;     
+                $j = $news_count ; 
+                $i = 0 ; 
+                  while($j && $i<6){
+                    $requete = $conn->prepare("SELECT * FROM news WHERE id=$j") ;     
                     $requete->execute(); 
                     $data = $requete->fetch(PDO::FETCH_ASSOC);
 
                     ?>
-                <a href="../administration/news_html/<?php echo $data['html'].".php"  ;?> " class="list-group-item list-group-item-action">
+                <a href="../news_html/<?php echo $data['html'].".php"  ;?> " class="list-group-item list-group-item-action p-3">
                 <div class="d-flex w-100 justify-content-between">
                   <h5 class="mb-1">
                 
@@ -135,12 +136,19 @@
                 
                 
               <?php 
-                $news_count-- ; 
-              }}
+                $j-- ; $i++;
+              }
                 
                 ?>
               </div>
               <!--  fin list group-->
+              
+              <?php 
+                    if($news_count > 6 ){
+                      echo '<a href="../news/news.php" class="button-87 rounded-pill w-50">Show more..</a>'; 
+                    }  
+              ?>
+
             </div>
             <!--  -->
 
@@ -203,7 +211,7 @@
                           <div style="height:  100%; overflow:hidden;" class="center w-100">
                             <img src="<?php echo "../image_news/" . $img2['cover'];  ?>" class="d-block h-100">
                           </div>
-                            <div class="carousel-caption d-none d-md-block" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
+                            <div class="carousel-caption d-none d-md-block mw-100" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
                               <h5><?php echo $img2['title'] ;?></h5>
                               <p><?php echo $img2['description'] ;?></p>
                             </div>

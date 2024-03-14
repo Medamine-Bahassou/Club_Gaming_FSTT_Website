@@ -12,24 +12,6 @@
 <body class="bg-dark text text-white">
 
 
-    <?php
-        $servername = "localhost";
-        $username = "root";
-        $password = "root";
-    // conn bdd
-      try {
-          $conn = new PDO("mysql:host=$servername;dbname=admin", $username, "");
-          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          // echo "Connected successfully <br>";
-      } catch (PDOException $e) {
-          echo "Connection failed: <br> " . $e->getMessage();
-      }
-
-
-
-    
-    
-    ?>
 
 
 
@@ -44,7 +26,7 @@
 
 
           <?php
-      
+          //bdd
           include '../bdd/utilisateur.php';
           
           $requete = $conn->prepare("SELECT COUNT(*) FROM news");
@@ -168,7 +150,7 @@
                     $data = $requete->fetch(PDO::FETCH_ASSOC);
               
                     ?>
-                <a href="../administration/news_html/<?php echo $data['html'].".php"  ;?> " class="list-group-item list-group-item-action">
+                <a href="../news_html/<?php echo $data['html'].".php"  ;?> " class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
                   <h5 class="mb-1">
                  

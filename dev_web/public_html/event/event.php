@@ -37,11 +37,12 @@ $result = $requet->fetchAll(PDO::FETCH_OBJ);
 <body class="bg-dark">
 
 
+    
+    <!-- carousel -->
+    <div class="carousel container-fluid" style=" height:100vh; margin:0;">
     <?php
         include '../navbar/navbar.php';
     ?>
-    <!-- carousel -->
-    <div class="carousel container-fluid" style=" height:100vh;">
         <!-- list item -->
         <div class="list">
             <?php

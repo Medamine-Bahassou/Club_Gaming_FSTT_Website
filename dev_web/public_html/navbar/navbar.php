@@ -80,7 +80,7 @@
                 transition:0.2s;
               }
               .anim:hover{
-                transform: scale(1.2);
+                color: #a8d8fd;;
               }
 
             </style>

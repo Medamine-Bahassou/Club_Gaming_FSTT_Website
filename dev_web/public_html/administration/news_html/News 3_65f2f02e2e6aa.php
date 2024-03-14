@@ -1,1 +1,0 @@
-<strike><font face="cursive">efkjzkjfirpgjri</font></strike>
