@@ -5,6 +5,7 @@ session_start();
 include '../bdd/utilisateur.php';
 
 
+<<<<<<< HEAD
 if (isset($_POST["login"])) {
     $email = $_POST['email'];
     $password1 = $_POST['password'];
@@ -29,6 +30,36 @@ if (isset($_POST["login"])) {
             if (isset($_POST['check'])) {
                 setcookie('email', $_SESSION['email'], time() + 10, null, null, false, true);
                 setcookie('password', $_SESSION['password'], time() + 10, null, null, false, true);
+=======
+        if (isset($_POST["login"])) {
+            $email = $_POST['email'];
+            $password1 = $_POST['password'];
+            
+            
+            $query = $conn->prepare("SELECT * FROM user WHERE email = :email");
+            $query->bindParam(':email', $email);
+            $query->execute();
+            $user = $query->fetch(PDO::FETCH_ASSOC);
+            if ($user) {
+                if ($password1 == $user['password']) {
+                    // echo "Login successful. Welcome, " . $user['nom'] . "<br>";
+                    $_SESSION['nom'] = $user['nom'];
+                    $_SESSION['prenom'] = $user['prenom'];
+                    $_SESSION['email'] = $user['email'];
+                    $_SESSION['date_naissance'] = $user['date_naissance'];
+                    $_SESSION['password'] = $user['password'];
+                    if(isset($_POST['check'])){
+                        setcookie('email' , $_SESSION['email'] , time()+10 , null , null , false , true); // 10 seconde 
+                        setcookie('password' , $_SESSION['password'] , time()+10 , null , null , false , true); // 10 seconde 
+                    }
+                    header("Location: ../home/home.php");
+                } else {
+                    //  echo "Incorrect password <br>";
+                    $emailerr = "Incorrect password";
+                }
+            } else {
+                $emailerr = "User n'existe pas";
+>>>>>>> 57bb5c689b5d80c3800196978effb5c6826ae508
             }
             header("Location: ../home/home.php");
         } else {
