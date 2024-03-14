@@ -2,50 +2,68 @@
 
 
 
-    include '../bdd/utilisateur.php';
+include '../bdd/utilisateur.php';
 
 
-    $i = 0;
-    $j = 0;
-    $genererr = "";
-    $emailexit = "";
-    $passerr = "";
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["ok"])) {
-        $nom = $_POST['nom'];
-        $prenom = $_POST['prenom'];
-        $date_naissance = $_POST['date'];
-        $genre = isset($_POST['genre']) ? $_POST['genre'] : '';
-        $email = $_POST['email'];
-        $password1 = $_POST['password1'];
-        $password2 = $_POST['password2'];
-        $tele = $_POST["tele"];
+$i = 0;
+$j = 0;
+$genererr = "";
+$emailexit = "";
+$passerr = "";
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["ok"])) {
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $date_naissance = $_POST['date'];
+    $genre = isset($_POST['genre']) ? $_POST['genre'] : '';
+    $email = $_POST['email'];
+    $password1 = $_POST['password1'];
+    $password2 = $_POST['password2'];
+    $tele = $_POST["tele"];
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            //echo "Invalid email";
-            $emailerr = "Invalid email";
-        }
+    $image = "";
+    if (isset($_FILES['image'])) {
+        $image = $_FILES['image']['name'];
+        $fileName = uniqid() . $image;
+        move_uploaded_file($_FILES['image']['tmp_name'], 'image/' . $fileName);
+    }
 
-        if ($password1 !== $password2) {
-            //echo "Passwords do not match";
-            $passerr = "Passwords do not match";
-        }
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        //echo "Invalid email";
+        $emailerr = "Invalid email";
+    }
 
-        if (empty($genre)) {
-            // echo "Please select your gender";
-            $genererr = "Please select your gender";
-        }
-        $emailexit = ""; // Initialize $emailexit
+    if ($password1 !== $password2) {
+        //echo "Passwords do not match";
+        $passerr = "Passwords do not match";
+    }
 
-        $email_check = $conn->prepare("SELECT COUNT(*) FROM user WHERE email = :email");
-        $email_check->bindParam(':email', $email);
-        $email_check->execute();
-        $count = $email_check->fetchColumn();
-        if ($count > 0) {
-            $emailexit = "Email  exists";
+    if (empty($genre)) {
+        // echo "Please select your gender";
+        $genererr = "Please select your gender";
+    }
+    $emailexit = ""; // Initialize $emailexit
+
+    $email_check = $conn->prepare("SELECT COUNT(*) FROM user WHERE email = :email");
+    $email_check->bindParam(':email', $email);
+    $email_check->execute();
+    $count = $email_check->fetchColumn();
+    if ($count > 0) {
+        $emailexit = "Email  exists";
+    } else {
+
+        //hash password
+        //$hashed_password = password_hash($password1, PASSWORD_DEFAULT);
+        if (!empty($image)) {
+            $requete = $conn->prepare("INSERT INTO user (nom, prenom, email, password, date_naissance, genre,tele,image) VALUES (:nom, :prenom, :email, :password, :date_naissance, :genre,:tele,:image)");
+            $requete->bindParam(':nom', $nom);
+            $requete->bindParam(':prenom', $prenom);
+            $requete->bindParam(':email', $email);
+            $requete->bindParam(':password', $password1);
+            $requete->bindParam(':date_naissance', $date_naissance);
+            $requete->bindParam(':genre', $genre);
+            $requete->bindParam(':tele', $tele);
+            $requete->bindParam(':image', $fileName);
         } else {
-
-            //hash password
-            //$hashed_password = password_hash($password1, PASSWORD_DEFAULT);
             $requete = $conn->prepare("INSERT INTO user (nom, prenom, email, password, date_naissance, genre,tele) VALUES (:nom, :prenom, :email, :password, :date_naissance, :genre,:tele)");
             $requete->bindParam(':nom', $nom);
             $requete->bindParam(':prenom', $prenom);
@@ -54,21 +72,23 @@
             $requete->bindParam(':date_naissance', $date_naissance);
             $requete->bindParam(':genre', $genre);
             $requete->bindParam(':tele', $tele);
+        }
 
-            try {
-                $requete->execute();
-                $i++;
-                //echo "User inserted successfully.";
 
-            } catch (PDOException $e) {
-                echo "Error: " . $e->getMessage();
-            }
-            if ($i == 1) {
-                header("Location: login.php");
-            }
+        try {
+            $requete->execute();
+            $i++;
+            //echo "User inserted successfully.";
+
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+        if ($i == 1) {
+            header("Location: login.php");
         }
     }
-    ?>
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,11 +107,11 @@
 
 <body style="background-color:black; background-image:url(../img/cover.jpg);">
 
-    
+
 
     <div class="inscription">
 
-        <form action="inscription.php" method="post" class="register-form">
+        <form action="inscription.php" method="post" class="register-form" enctype="multipart/form-data">
             <h1 class="login-title">Register</h1>
 
 
@@ -143,6 +163,11 @@
 
                 </div>
                 <span class="text text-danger"><?php echo @$passerr; ?></span>
+            </div>
+            <div class="mb-3 input-box">
+                <label for="formFile" class="form-label" style="font-weight: bold;">Image</label>
+                <input name="image" class="form-control rounded-pill" type="file" id="formFile">
+
             </div>
             <button class="login-btn" type="submit" name="ok" value="ok">inscrit</button>
         </form>

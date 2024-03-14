@@ -25,6 +25,7 @@ if (isset($_POST["login"])) {
             $_SESSION['date_naissance'] = $user['date_naissance'];
             $_SESSION['password'] = $user['password'];
             $_SESSION['id'] = $user['id'];
+            $_SESSION['image'] = $user['image'];
 
             if (isset($_POST['check'])) {
                 setcookie('email', $_SESSION['email'], time() + 10, null, null, false, true);

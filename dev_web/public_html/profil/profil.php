@@ -20,7 +20,20 @@ if (empty($_SESSION)) {
     <body>
         <div class=" w-100 p-3  d-flex justify-content-center align-items-center h-100 d-inline-block">
             <div class="card " style="width: 18rem;">
-                <img src="user.png" class="card-img-top" alt="...">
+                <?php
+
+                if (!empty($_SESSION['image'])) {
+                ?>
+                    <img src="<?php echo "../logins/image/" . $_SESSION['image']; ?>" class="card-img-top" alt="...">
+
+                <?php
+                } else {
+                ?>
+                    <img src="<?php echo "user.png"; ?>" class="card-img-top" alt="...">
+                <?php
+                }
+                ?>
+
                 <div class="card-body">
                     <h5 class="card-title">Profil</h5>
 
