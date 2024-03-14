@@ -25,6 +25,10 @@
     color:#eee;
 }
 
+d{
+  color: rgba(59, 59, 59, 0.425);
+  box-shadow: 0 0 10px 100px rgba(59, 59, 59, 0.425) ;
+}
 /*  */
 
 

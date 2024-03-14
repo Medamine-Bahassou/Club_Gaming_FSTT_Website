@@ -79,7 +79,7 @@
             <!-- contenue de slide  -->
             
             <div id="slides" style="width:100%; padding-top: 100px;">
-                <div id="carouselExampleCaptions" class="carousel slide mw-100" data-bs-ride="carousel">
+                <div id="carouselExampleCaptions" class="carousel slide mw-100" data-bs-ride="carousel" >
                     <div class="carousel-indicators">
                     <?php if($img1 != null) { ?>
                       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -102,7 +102,7 @@
                             <div style="height: 60vh; overflow:hidden;" class="center w-100">
                             <img src="<?php echo "../image_news/" . $img1['cover'] ;  ?>" class="d-block w-100">
                             </div>
-                            <div class="carousel-caption d-none d-md-block">
+                            <div class="carousel-caption d-none d-md-block" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
                               <h5><?php echo $img1['title'] ;?></h5>
                               <p><?php echo $img1['description'] ;?></p>
                             </div>
@@ -115,7 +115,7 @@
                           <div style="height: 60vh; overflow:hidden;" class="center w-100">
                             <img src="<?php echo "../image_news/" . $img2['cover'];  ?>" class="d-block w-100">
                           </div>
-                            <div class="carousel-caption d-none d-md-block">
+                            <div class="carousel-caption d-none d-md-block" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
                               <h5><?php echo $img2['title'] ;?></h5>
                               <p><?php echo $img2['description'] ;?></p>
                             </div>
@@ -129,7 +129,7 @@
                           <div style="height: 60vh; overflow:hidden;" class="center w-100">
                             <img src="<?php echo "../image_news/" . $img3['cover'] ;  ?>" class="d-block w-100">
                           </div>
-                            <div class="carousel-caption d-none d-md-block">
+                            <div class="carousel-caption d-none d-md-block" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
                               <h5><?php echo $img3['title'] ;?></h5>
                               <p><?php echo $img3['description'] ;?></p>
                             </div>
@@ -140,11 +140,11 @@
                     </div>
                     <?php } ?>
                     
-                    <button class="carousel-control-prev bg-dark" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                    <button class="carousel-control-prev bg-dark" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev" style="height: 60vh; margin-top:100px ;">
                       <span class="carousel-control-prev-icon" aria-hidden="true" ></span>
                       <span class="visually-hidden" >Previous</span>
                     </button>
-                    <button class="carousel-control-next bg-dark" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                    <button class="carousel-control-next bg-dark" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next" style="height: 60vh; margin-top:100px ;">
                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
                       <span class="visually-hidden">Next</span>
                     </button>
