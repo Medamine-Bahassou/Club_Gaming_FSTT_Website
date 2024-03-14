@@ -27,7 +27,7 @@ include('includes/navbar.php');
         if (isset($_FILES['image'])) {
             $image = $_FILES['image']['name'];
             $fileName = uniqid() . $image;
-            move_uploaded_file($_FILES['image']['tmp_name'], './image/' . $fileName);
+            move_uploaded_file($_FILES['image']['tmp_name'], '../image_event/' . $fileName);
         }
 
 

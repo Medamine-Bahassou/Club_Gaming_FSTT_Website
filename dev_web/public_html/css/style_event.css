@@ -10,6 +10,10 @@ a{
     text-decoration: none;
 }
 
+
+dd{
+    background-color: rgba(128, 128, 128, 0.459);
+}
 /* carousel */
 .carousel{
     height: 100vh;

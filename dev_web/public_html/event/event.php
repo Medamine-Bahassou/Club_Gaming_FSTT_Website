@@ -1,26 +1,26 @@
 <?php
-    session_start();
+session_start();
 ?>
 
 <?php
 
 
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "root";
+$servername = "localhost";
+$username = "root";
+$password = "root";
 
-    try {
-        $conn = new PDO("mysql:host=$servername;dbname=utilisateur", $username, "");
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        //echo "Connected successfully <br>";
-    } catch (PDOException $e) {
-        echo "Connection failed: <br> " . $e->getMessage();
-    }
-    $requet = $conn->prepare('SELECT * FROM event');
-    $requet->execute();
-    $result = $requet->fetchAll(PDO::FETCH_OBJ);
-    ?>
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=utilisateur", $username, "");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //echo "Connected successfully <br>";
+} catch (PDOException $e) {
+    echo "Connection failed: <br> " . $e->getMessage();
+}
+$requet = $conn->prepare('SELECT * FROM event');
+$requet->execute();
+$result = $requet->fetchAll(PDO::FETCH_OBJ);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,11 +35,11 @@
 </head>
 
 <body class="bg-dark">
-    
+
     <!-- nav bar star  -->
     <nav class="navbar navbar-expand-lg fixed-top row bg-dark" style="padding: 0 15px; margin-bottom: 100px;">
         <div class="container-fluid">
-            <a class="navbar-brand me-auto col container" href="#"><img src="../logo/fstgaming.png" width="50px"></a>
+            <a class="navbar-brand me-auto col container" href="../home/home.php"><img src="../logo/fstgaming.png" width="50px"></a>
 
             <div class="offcanvas offcanvas-end bg-dark " data-bs-theme="dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
@@ -68,34 +68,34 @@
                 </div>
             </div>
             <?php
-            if(empty($_SESSION)){
-              ?>
-                  <div class="col-md-auto">
-                  <a href="../logins/login.php" class="login-button">Login</a>
-                
-                  <a href="../logins/inscription.php " class="login-button me-3">Inscription</a>
-                </div>
-              
-            <?php
-            }else{
-              ?>
+            if (empty($_SESSION)) {
+            ?>
+                <div class="col-md-auto">
+                    <a href="../logins/login.php" class="login-button">Login</a>
 
-              
-              <div class="col-md-auto text text-white"> 
-              
-            <div class=" col-md-autotext text-white ms-2">
-            <a href="../profil/profil.php" class="button-87 rounded-pill">Profil</a>
-            </div>
-               
-            </div>
-            <div class="col-md-auto text text-white ms-2">
-            <a href="../logins/deconnexion.php" class="button-87 rounded-pill">Deconnect</a>
-            </div>
-            
-               
-              
-            
-          <?php } ?>
+                    <a href="../logins/inscription.php " class="login-button me-3">Inscription</a>
+                </div>
+
+            <?php
+            } else {
+            ?>
+
+
+                <div class="col-md-auto text text-white">
+
+                    <div class=" col-md-autotext text-white ms-2">
+                        <a href="../profil/profil.php" class="button-87 rounded-pill">Profil</a>
+                    </div>
+
+                </div>
+                <div class="col-md-auto text text-white ms-2">
+                    <a href="../logins/deconnexion.php" class="button-87 rounded-pill">Deconnect</a>
+                </div>
+
+
+
+
+            <?php } ?>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-theme="dark" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -108,13 +108,13 @@
     <!-- carousel -->
     <div class="carousel container-fluid" style="margin-top: 60px; height:93vh;">
         <!-- list item -->
-        <div class="list" >
+        <div class="list">
             <?php
             foreach ($result as $event) {
 
             ?>
                 <div class="item">
-                    <img src="../admin/image/<?php echo $event->image ?>" alt="">
+                    <img src="../image_event/<?php echo $event->image ?>" alt="">
                     <div class="content">
                         <div class="author"><?php echo $event->type ?></div>
                         <div class="title"><?php echo $event->name ?></div>
@@ -201,7 +201,7 @@
         <div class="thumbnail">
             <?php foreach ($result as $event_thumbnail) { ?>
                 <div class="item">
-                    <img src="../admin/image/<?php echo $event_thumbnail->image ?>">
+                    <img src="../image_event/<?php echo $event_thumbnail->image ?>">
                     <div class="content">
                         <div class="title">
                             <?php echo $event_thumbnail->name ?>
@@ -259,13 +259,6 @@
     </div>
 
     <script src="../scripts/script_event.js"></script>
-
-
-    <div>
-            
-        <a href="../admin/admin_event.php" class="button-87" style="width: 200px;">Admin</a>
-
-    </div>
 </body>
 
 </html>

@@ -1,21 +1,15 @@
 <?php
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "root";
+
+
+    include '../bdd/utilisateur.php';
+
+
     $i = 0;
     $j = 0;
     $genererr = "";
     $emailexit = "";
     $passerr = "";
-    try {
-        $conn = new PDO("mysql:host=$servername;dbname=utilisateur", $username, "");
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        //echo "Connected successfully";
-    } catch (PDOException $e) {
-        echo "Connection failed: " . $e->getMessage();
-    }
-
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["ok"])) {
         $nom = $_POST['nom'];
         $prenom = $_POST['prenom'];

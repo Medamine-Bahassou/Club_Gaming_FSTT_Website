@@ -1,55 +1,47 @@
 <?php
 
-    session_start();
+session_start();
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "root";
+include '../bdd/utilisateur.php';
 
-    
-        try {
-            $conn = new PDO("mysql:host=$servername;dbname=utilisateur", $username, "");
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            // echo "Connected successfully <br>";
-        } catch (PDOException $e) {
-            echo "Connection failed: <br> " . $e->getMessage();
-        }
-        
 
-        if (isset($_POST["login"])) {
-            $email = $_POST['email'];
-            $password1 = $_POST['password'];
-            
-            
-            $query = $conn->prepare("SELECT * FROM user WHERE email = :email");
-            $query->bindParam(':email', $email);
-            $query->execute();
-            $user = $query->fetch(PDO::FETCH_ASSOC);
-            if ($user) {
-                if ($password1 == $user['password']) {
-                    // echo "Login successful. Welcome, " . $user['nom'] . "<br>";
-                    $_SESSION['nom'] = $user['nom'];
-                    $_SESSION['prenom'] = $user['prenom'];
-                    $_SESSION['email'] = $user['email'];
-                    $_SESSION['date_naissance'] = $user['date_naissance'];
-                    $_SESSION['password'] = $user['password'];
-                    if(isset($_POST['check'])){
-                        setcookie('email' , $_SESSION['email'] , time()+10 , null , null , false , true);
-                        setcookie('password' , $_SESSION['password'] , time()+10 , null , null , false , true);
-                    }
-                    header("Location: ../home/home.php");
-                } else {
-                    //  echo "Incorrect password <br>";
-                    $emailerr = "Incorrect password";
-                }
-            } else {
-                $emailerr = "User n'existe pas";
+if (isset($_POST["login"])) {
+    $email = $_POST['email'];
+    $password1 = $_POST['password'];
+    if ($email == 'admin@fst.com' && $password1 == 'root') {
+        header("Location: ../administration/login.php");
+    }
+
+    $query = $conn->prepare("SELECT * FROM user WHERE email = :email");
+    $query->bindParam(':email', $email);
+    $query->execute();
+    $user = $query->fetch(PDO::FETCH_ASSOC);
+    if ($user) {
+        if ($password1 == $user['password']) {
+            // echo "Login successful. Welcome, " . $user['nom'] . "<br>";
+            $_SESSION['nom'] = $user['nom'];
+            $_SESSION['prenom'] = $user['prenom'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['date_naissance'] = $user['date_naissance'];
+            $_SESSION['password'] = $user['password'];
+            $_SESSION['id'] = $user['id'];
+
+            if (isset($_POST['check'])) {
+                setcookie('email', $_SESSION['email'], time() + 10, null, null, false, true);
+                setcookie('password', $_SESSION['password'], time() + 10, null, null, false, true);
             }
-            
+            header("Location: ../home/home.php");
+        } else {
+            //  echo "Incorrect password <br>";
+            $emailerr = "Incorrect password";
         }
-    
+    } else {
+        $emailerr = "User n'existe pas";
+    }
+}
 
-    ?>
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -74,7 +66,7 @@
 
 <body style="height: 100vh; background-color:black; background-image:url(../img/cover.jpg);">
 
-    
+
 
     <div class="login">
 
@@ -83,13 +75,13 @@
 
             <div class="input-box">
                 <i class='bx bxs-user'></i>
-                <input type="email" placeholder="Email" name="email" value="<?php if(isset($_COOKIE['email'])) echo $_COOKIE['email']; ?>">
+                <input type="email" placeholder="Email" name="email" value="<?php if (isset($_COOKIE['email'])) echo $_COOKIE['email']; ?>">
 
             </div>
 
             <div class="input-box">
                 <i class='bx bxs-lock-alt'></i>
-                <input type="password" placeholder="Password" name="password" value="<?php if(isset($_COOKIE['password'])) echo $_COOKIE['password']; ?>">
+                <input type="password" placeholder="Password" name="password" value="<?php if (isset($_COOKIE['password'])) echo $_COOKIE['password']; ?>">
             </div>
             <p class="erro"><?php echo @$emailerr; ?></p>
             <div class="m-3">
