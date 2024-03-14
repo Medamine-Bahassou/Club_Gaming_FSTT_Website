@@ -12,24 +12,6 @@
 <body class="bg-dark text text-white">
 
 
-    <?php
-        $servername = "localhost";
-        $username = "root";
-        $password = "root";
-    // conn bdd
-      try {
-          $conn = new PDO("mysql:host=$servername;dbname=admin", $username, "");
-          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          // echo "Connected successfully <br>";
-      } catch (PDOException $e) {
-          echo "Connection failed: <br> " . $e->getMessage();
-      }
-
-
-
-    
-    
-    ?>
 
 
 
@@ -44,7 +26,7 @@
 
 
           <?php
-      
+          //bdd
           include '../bdd/utilisateur.php';
           
           $requete = $conn->prepare("SELECT COUNT(*) FROM news");
@@ -79,7 +61,7 @@
             <!-- contenue de slide  -->
             
             <div id="slides" style="width:100%; padding-top: 100px;">
-                <div id="carouselExampleCaptions" class="carousel slide mw-100" data-bs-ride="carousel">
+                <div id="carouselExampleCaptions" class="carousel slide mw-100" data-bs-ride="carousel" >
                     <div class="carousel-indicators">
                     <?php if($img1 != null) { ?>
                       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -102,7 +84,7 @@
                             <div style="height: 60vh; overflow:hidden;" class="center w-100">
                             <img src="<?php echo "../image_news/" . $img1['cover'] ;  ?>" class="d-block w-100">
                             </div>
-                            <div class="carousel-caption d-none d-md-block">
+                            <div class="carousel-caption d-none d-md-block" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
                               <h5><?php echo $img1['title'] ;?></h5>
                               <p><?php echo $img1['description'] ;?></p>
                             </div>
@@ -115,7 +97,7 @@
                           <div style="height: 60vh; overflow:hidden;" class="center w-100">
                             <img src="<?php echo "../image_news/" . $img2['cover'];  ?>" class="d-block w-100">
                           </div>
-                            <div class="carousel-caption d-none d-md-block">
+                            <div class="carousel-caption d-none d-md-block" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
                               <h5><?php echo $img2['title'] ;?></h5>
                               <p><?php echo $img2['description'] ;?></p>
                             </div>
@@ -129,7 +111,7 @@
                           <div style="height: 60vh; overflow:hidden;" class="center w-100">
                             <img src="<?php echo "../image_news/" . $img3['cover'] ;  ?>" class="d-block w-100">
                           </div>
-                            <div class="carousel-caption d-none d-md-block">
+                            <div class="carousel-caption d-none d-md-block" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
                               <h5><?php echo $img3['title'] ;?></h5>
                               <p><?php echo $img3['description'] ;?></p>
                             </div>
@@ -140,11 +122,11 @@
                     </div>
                     <?php } ?>
                     
-                    <button class="carousel-control-prev bg-dark" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                    <button class="carousel-control-prev bg-dark" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev" style="height: 60vh; margin-top:100px ;">
                       <span class="carousel-control-prev-icon" aria-hidden="true" ></span>
                       <span class="visually-hidden" >Previous</span>
                     </button>
-                    <button class="carousel-control-next bg-dark" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                    <button class="carousel-control-next bg-dark" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next" style="height: 60vh; margin-top:100px ;">
                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
                       <span class="visually-hidden">Next</span>
                     </button>
@@ -158,17 +140,17 @@
 
                 <?php
 
-                $news = $conn->prepare("SELECT COUNT(*) FROM news");
+                $news = $conn->prepare("SELECT COUNT(*) FROM news WHERE id is not null");
                 $news->execute();
                 $news_count = $news->fetchColumn();
-                for($i=1;$i<=10;$i++){
+                for($i=1;$i<=6;$i++){
                   while($news_count){
                     $requete = $conn->prepare("SELECT * FROM news WHERE id=$news_count") ;     
                     $requete->execute(); 
                     $data = $requete->fetch(PDO::FETCH_ASSOC);
               
                     ?>
-                <a href="../administration/news_html/<?php echo $data['html'].".php"  ;?> " class="list-group-item list-group-item-action">
+                <a href="../news_html/<?php echo $data['html'].".php"  ;?> " class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
                   <h5 class="mb-1">
                  

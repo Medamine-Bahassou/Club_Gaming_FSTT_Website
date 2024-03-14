@@ -1,3 +1,5 @@
+<html>
+  <head>
 <!-- FontAwesome Icons -->
 <link
   rel="stylesheet"
@@ -71,7 +73,8 @@
         height: 50vh;
       }
 </style>
-
+    </head>
+<body>
   <div class="options">
     <!-- Text Format -->
     <a href="#" id="bold" class="option-button format button-link">
@@ -139,6 +142,7 @@
 
     <!-- Headings -->
     <select id="formatBlock" class="adv-option-button">
+      <option value=""></option>
       <option value="H1">H1</option>
       <option value="H2">H2</option>
       <option value="H3">H3</option>
@@ -161,3 +165,5 @@
       <label for="backColor">Highlight Color</label>
     </div>
   </div>
+    </body>
+</html>

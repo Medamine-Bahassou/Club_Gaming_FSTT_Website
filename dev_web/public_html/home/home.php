@@ -78,7 +78,7 @@
                   <h5 class="card-title text text-warning display-8 pixel hide" style="display:none;">Date de creation</h5>
                   <p class="card-text text text-white hide" style="display:none;"> 2024/22/10</p>
                 </div>
-                <button class="button-87 mb-4 w-75 rounded-pill activeBtn" style="bottom: 0;">Show more</button> >
+                <button class="button-87 mb-4 w-75 rounded-pill activeBtn" style="bottom: 0;">Show more</button> 
                 <button class="button-87 mb-4 w-75 rounded-pill hideBtn" style="bottom: 0;display:none ;">>Hide</button>
 
               </div>
@@ -103,54 +103,136 @@
           <!-- list group -->
           <div class="row">
             <div class="col-md-6 mb-5 ">
-              <div class="list-group rounded-5">
-                <a href="#" class="list-group-item list-group-item-action active p-3" aria-current="true">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small>3 days ago</small>
-                  </div>
-                  <p class="mb-1">Some placeholder content in a paragraph.</p>
-                  <small>And some small print.</small>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action p-3">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small class="text-muted">3 days ago</small>
-                  </div>
-                  <p class="mb-1">Some placeholder content in a paragraph.</p>
-                  <small class="text-muted">And some muted small print.</small>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action p-3">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small class="text-muted">3 days ago</small>
-                  </div>
-                  <p class="mb-1">Some placeholder content in a paragraph.</p>
-                  <small class="text-muted">And some muted small print.</small>
-                </a>
+              <div class="list-group rounded-5 ">
+              <?php
+                include '../bdd/utilisateur.php';
+
+                $news = $conn->prepare("SELECT COUNT(*) FROM news");
+                $news->execute();
+                $news_count = $news->fetchColumn();
+                $j = $news_count ; 
+                $i = 0 ; 
+                  while($j && $i<6){
+                    $requete = $conn->prepare("SELECT * FROM news WHERE id=$j") ;     
+                    $requete->execute(); 
+                    $data = $requete->fetch(PDO::FETCH_ASSOC);
+
+                    ?>
+                <a href="../news_html/<?php echo $data['html'].".php"  ;?> " class="list-group-item list-group-item-action p-3">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">
+                
+                <?php
+                echo $data['title'] ; 
+                          
+                ?>
+
+                </h5>
+                  <small class="text-body-secondary"><?php echo $data['date_pub'] ;?></small>
+                </div>
+                <p class="mb-1"><?php echo $data['description'] ;?></p>
+                <small class="text-body-secondary">And some muted small print.</small>
+              </a>
+                
+                
+              <?php 
+                $j-- ; $i++;
+              }
+                
+                ?>
               </div>
               <!--  fin list group-->
+              
+              <?php 
+                    if($news_count > 6 ){
+                      echo '<a href="../news/news.php" class="button-87 rounded-pill w-50">Show more..</a>'; 
+                    }  
+              ?>
+
             </div>
             <!--  -->
+
+
+
+            <?php
+          
+                      $requete = $conn->prepare("SELECT COUNT(*) FROM news");
+                      $requete->execute(); 
+                      $count = $requete->fetchColumn(); 
+                      $requete = $conn->prepare("SELECT * FROM news WHERE id=$count") ; 
+                      $requete->execute();
+                      $img1= $requete->fetch(PDO::FETCH_ASSOC);
+                      $requete = $conn->prepare("SELECT * FROM news WHERE id=$count-1") ; 
+                      $requete->execute();
+                      $img2= $requete->fetch(PDO::FETCH_ASSOC);
+                      $requete = $conn->prepare("SELECT * FROM news WHERE id=$count-2") ; 
+                      $requete->execute();
+                      $img3= $requete->fetch(PDO::FETCH_ASSOC);
+            
+            
+            ?>
+
+
+
+
             <!-- slide -->
             <div class="col-md-6">
-              <div id="carouselExampleIndicators" class="carousel slide " data-bs-ride="carousel">
+              <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators ">
-                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <?php if($img1 != null) { ?>
+                      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                      <?php } ?>
+                     
+                      <?php if($img2 != null) { ?>
+                      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                      <?php } ?>
+                     
+                      <?php if($img3 != null) { ?>
+                      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                      <?php } ?>
                 </div>
-                <div class="carousel-inner bg-dark  shadow p-3 mb-5 rounded-5" style="height:500px;">
-                  <div class="carousel-item active">
-                    <img src="../logo/fstgaming.png" class="d-block w-100">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="..." class="d-block w-100" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="..." class="d-block w-100" alt="...">
-                  </div>
+                <div class="carousel-inner bg-dark  shadow  mb-5 rounded-5" style="height:500px;">
+                <?php if($img1 != null) { ?>
+                      <div class="carousel-item active">
+                        <div class="d-flex justify-content-center align-item-center h-100">
+                            <div style="height: 100%; overflow:hidden; " class="center w-100">
+                            <img src="<?php echo "../image_news/" . $img1['cover'] ;  ?>" class="d-block  h-100">
+                            </div>
+                            <div class="carousel-caption d-none d-md-block" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
+                              <h5 ><?php echo $img1['title'] ;?></h5>
+                              <p><?php echo $img1['description'] ;?></p>
+                            </div>
+                        </div>
+                      </div>
+                      <?php } ?>
+                    <?php if($img2 != null) { ?>
+                      <div class="carousel-item ">
+                        <div class="d-flex justify-content-center align-item-center h-100">
+                          <div style="height:  100%; overflow:hidden;" class="center w-100">
+                            <img src="<?php echo "../image_news/" . $img2['cover'];  ?>" class="d-block h-100">
+                          </div>
+                            <div class="carousel-caption d-none d-md-block mw-100" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
+                              <h5><?php echo $img2['title'] ;?></h5>
+                              <p><?php echo $img2['description'] ;?></p>
+                            </div>
+                        </div>
+                      </div>
+                      <?php } ?>
+                    <?php if($img3 != null) { ?>
+
+                      <div class="carousel-item ">
+                        <div class="d-flex justify-content-center align-item-center h-100">
+                          <div style="height:  100%; overflow:hidden;" class="center w-100">
+                            <img src="<?php echo "../image_news/" . $img3['cover'] ;  ?>" class="d-block h-100" >
+                          </div>
+                            <div class="carousel-caption d-none d-md-block" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
+                              <h5 ><?php echo $img3['title'] ;?></h5>
+                              <p><?php echo $img3['description'] ;?></p>
+                            </div>
+                        </div>
+                      </div>
                 </div>
+                <?php } ?>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Previous</span>

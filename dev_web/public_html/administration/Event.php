@@ -6,17 +6,11 @@ include('includes/navbar.php');
 
 <?php
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "root";
+    //bdd
+    include '../bdd/utilisateur.php';
 
-    try {
-        $conn = new PDO("mysql:host=$servername;dbname=utilisateur", $username, "");
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        // echo "Connected successfully <br>";
-    } catch (PDOException $e) {
-        echo "Connection failed: <br> " . $e->getMessage();
-    }
+
+
     if (isset($_POST['submit'])) {
         $type = $_POST['type'];
         $name = $_POST['name'];
