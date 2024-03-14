@@ -158,10 +158,10 @@
 
                 <?php
 
-                $news = $conn->prepare("SELECT COUNT(*) FROM news");
+                $news = $conn->prepare("SELECT COUNT(*) FROM news WHERE id is not null");
                 $news->execute();
                 $news_count = $news->fetchColumn();
-                for($i=1;$i<=10;$i++){
+                for($i=1;$i<=6;$i++){
                   while($news_count){
                     $requete = $conn->prepare("SELECT * FROM news WHERE id=$news_count") ;     
                     $requete->execute(); 
