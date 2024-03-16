@@ -19,19 +19,24 @@ if (isset($_POST["login"])) {
     if ($user) {
         if ($password1 == $user['password']) {
             // echo "Login successful. Welcome, " . $user['nom'] . "<br>";
-            $_SESSION['nom'] = $user['nom'];
-            $_SESSION['prenom'] = $user['prenom'];
-            $_SESSION['email'] = $user['email'];
-            $_SESSION['date_naissance'] = $user['date_naissance'];
-            $_SESSION['password'] = $user['password'];
-            $_SESSION['id'] = $user['id'];
-            $_SESSION['image'] = $user['image'];
+            if ($user['is_verified'] == 1) {
+                $_SESSION['nom'] = $user['nom'];
+                $_SESSION['prenom'] = $user['prenom'];
+                $_SESSION['email'] = $user['email'];
+                $_SESSION['date_naissance'] = $user['date_naissance'];
+                $_SESSION['password'] = $user['password'];
+                $_SESSION['id'] = $user['id'];
+                $_SESSION['tele'] = $user['tele'];
+                $_SESSION['image'] = $user['image'];
 
-            if (isset($_POST['check'])) {
-                setcookie('email', $_SESSION['email'], time() + 10, null, null, false, true);
-                setcookie('password', $_SESSION['password'], time() + 10, null, null, false, true);
+                if (isset($_POST['check'])) {
+                    setcookie('email', $_SESSION['email'], time() + 10, null, null, false, true);
+                    setcookie('password', $_SESSION['password'], time() + 10, null, null, false, true);
+                }
+                header("Location: ../home/home.php");
+            } else {
+                $emailerr = "not register";
             }
-            header("Location: ../home/home.php");
         } else {
             //  echo "Incorrect password <br>";
             $emailerr = "Incorrect password";

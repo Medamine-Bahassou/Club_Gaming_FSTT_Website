@@ -1,9 +1,44 @@
 <?php
 
+// Ensure the correct path to autoload.php
+require '../bdd/utilisateur.php';
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-include '../bdd/utilisateur.php';
+function sendMail($email, $v_code_)
+{
+    require 'phpmailer/src/Exception.php';
+    require 'phpmailer/src/PHPMailer.php';
+    require 'phpmailer/src/SMTP.php';
+    $mail = new PHPMailer(true);
+    try {
+        //Server settings            //Enable verbose debug output
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'houdayfaechffani@gmail.com';                     //SMTP username
+        $mail->Password   = 'yhfoowqqztnvwazd';                               //SMTP password
+        $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
+        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
+        //Recipients
+        $mail->setFrom('houdayfaechffani@gmail.com');
+        $mail->addAddress($email);     //Add a recipient
+
+        //Content
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = 'email verification from Fst Game';
+        $mail->Body    = "click the link to active your account <a href='http://localhost/webfinafinal/Club_Gaming_FSTT_Website/dev_web/public_html/logins/verification_email.php?email=$email&v_code=$v_code_'>verifiy</a>";
+
+        $mail->send();
+        echo "<script> alert('Sent successfully') </script>";
+        return true;
+    } catch (Exception $e) {
+        return false;
+    }
+}
 
 $i = 0;
 $j = 0;
@@ -19,6 +54,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["ok"])) {
     $password1 = $_POST['password1'];
     $password2 = $_POST['password2'];
     $tele = $_POST["tele"];
+    $verification_code = bin2hex(random_bytes(16));
+    $code = 0;
+
+
+    // $mail = new PHPMailer(true);
+    // $mail->isSMTP();
+    // $mail->Host = 'smtp.gmail.com';
+    // $mail->SMTPAuth   = true;
+
 
     $image = "";
     if (isset($_FILES['image'])) {
@@ -51,10 +95,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["ok"])) {
         $emailexit = "Email  exists";
     } else {
 
-        //hash password
-        //$hashed_password = password_hash($password1, PASSWORD_DEFAULT);
         if (!empty($image)) {
-            $requete = $conn->prepare("INSERT INTO user (nom, prenom, email, password, date_naissance, genre,tele,image) VALUES (:nom, :prenom, :email, :password, :date_naissance, :genre,:tele,:image)");
+            $requete = $conn->prepare("INSERT INTO user (nom, prenom, email, password, date_naissance, genre,tele,image,verification_code,is_verified) VALUES (:nom, :prenom, :email, :password, :date_naissance, :genre,:tele,:image,:verification_code,:is_verified)");
             $requete->bindParam(':nom', $nom);
             $requete->bindParam(':prenom', $prenom);
             $requete->bindParam(':email', $email);
@@ -63,8 +105,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["ok"])) {
             $requete->bindParam(':genre', $genre);
             $requete->bindParam(':tele', $tele);
             $requete->bindParam(':image', $fileName);
+            $requete->bindParam(':verification_code', $verification_code);
+            $requete->bindParam('is_verified', $code);
         } else {
-            $requete = $conn->prepare("INSERT INTO user (nom, prenom, email, password, date_naissance, genre,tele) VALUES (:nom, :prenom, :email, :password, :date_naissance, :genre,:tele)");
+            $requete = $conn->prepare("INSERT INTO user (nom, prenom, email, password, date_naissance, genre,tele,verification_code,is_verified	) VALUES (:nom, :prenom, :email, :password, :date_naissance, :genre,:tele,:verification_code,:is_verified)");
             $requete->bindParam(':nom', $nom);
             $requete->bindParam(':prenom', $prenom);
             $requete->bindParam(':email', $email);
@@ -72,11 +116,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["ok"])) {
             $requete->bindParam(':date_naissance', $date_naissance);
             $requete->bindParam(':genre', $genre);
             $requete->bindParam(':tele', $tele);
+            $requete->bindParam(':verification_code', $verification_code);
+            $requete->bindParam(':is_verified', $code);
         }
-
-
         try {
             $requete->execute();
+            sendMail($email, $verification_code);
             $i++;
             //echo "User inserted successfully.";
 
@@ -86,6 +131,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["ok"])) {
         if ($i == 1) {
             header("Location: login.php");
         }
+        // } catch (Exception $e) {
+        //     echo "Message could no be sent .Mailer Error:{$mail->ErrorInfo}";
+        // }
+        //hash password
+        //$hashed_password = password_hash($password1, PASSWORD_DEFAULT);
+
+
+
+
     }
 }
 ?>
