@@ -1,5 +1,5 @@
 
-        <head>
+<head>
         <title>Club Gaming </title>
         <link href="../bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -41,9 +41,4 @@
             }
             
         </style>
-</head>
-
-<?php include "../navbar/navbar.php"; ?>
-<div class="container" style="padding-top:100px;">
-
-        <h1>News1&nbsp;</h1><div>dedezffz</div><div>fsfgez</div></div>
+        </head>

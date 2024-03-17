@@ -1,19 +1,18 @@
 <?php
-// Vérifier si des données ont été envoyées via POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupérer les données du div
-    $divData = $_POST["data-input"];
-    // Faire quelque chose avec les données...
-    echo "Données du div : " . $divData;
-}
-
-
-if(isset($_POST['data-input'])){
-    //move_uploaded_file($_POST['data-input'],'profil/'."de.html");
-    file_put_contents("profil/de.html",$_POST['data-input']);
-}
-
-var_dump($_POST) ; 
-
-
+    $style = 'dede<div id="mohamed"> mohamed </div>'; 
 ?>
+
+<div id="style" style="display: none;">
+    <?php echo $style; ?>
+</div>
+
+<div id="res">
+
+</div>
+
+
+<script>
+    var stylee = document.getElementById('style').innerHTML; 
+    var mohamed = document.getElementById('mohamed').innerHTML; 
+    document.getElementById('res').innerHTML =  mohamed; 
+</script>

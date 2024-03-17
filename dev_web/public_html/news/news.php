@@ -60,7 +60,7 @@
 
             <!-- contenue de slide  -->
             
-            <div id="slides" style="width:100%; padding-top: 100px;">
+            <div id="slides" style="width:100%; margin-top: 100px;">
                 <div id="carouselExampleCaptions" class="carousel slide mw-100" data-bs-ride="carousel" >
                     <div class="carousel-indicators">
                     <?php if($img1 != null) { ?>
@@ -80,53 +80,58 @@
                       
                     <?php if($img1 != null) { ?>
                       <div class="carousel-item active">
-                        <div class="d-flex justify-content-center align-item-center">
-                            <div style="height: 60vh; overflow:hidden;" class="center w-100">
-                            <img src="<?php echo "../image_news/" . $img1['cover'] ;  ?>" class="d-block w-100">
-                            </div>
-                            <div class="carousel-caption d-none d-md-block" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
-                              <h5><?php echo $img1['title'] ;?></h5>
-                              <p><?php echo $img1['description'] ;?></p>
-                            </div>
-                        </div>
+                        <a href="../news_html/<?php echo $img1['html'].".php"  ;?> ">
+                          <div class="d-flex justify-content-center align-item-center">
+                              <div style="height: 60vh; overflow:hidden;" class="center w-100">
+                              <img src="<?php echo "../image_news/" . $img1['cover'] ;  ?>" class="d-block w-100">
+                              </div>
+                              <div class="carousel-caption d-none d-md-block" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
+                                <h5><?php echo $img1['title'] ;?></h5>
+                                <p><?php echo $img1['description'] ;?></p>
+                              </div>
+                          </div>
+                        </a>
                       </div>
                       <?php } ?>
                     <?php if($img2 != null) { ?>
                       <div class="carousel-item ">
-                        <div class="d-flex justify-content-center align-item-center">
-                          <div style="height: 60vh; overflow:hidden;" class="center w-100">
-                            <img src="<?php echo "../image_news/" . $img2['cover'];  ?>" class="d-block w-100">
-                          </div>
-                            <div class="carousel-caption d-none d-md-block" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
-                              <h5><?php echo $img2['title'] ;?></h5>
-                              <p><?php echo $img2['description'] ;?></p>
+                        <a href="../news_html/<?php echo $img2['html'].".php"  ;?> ">
+                          <div class="d-flex justify-content-center align-item-center">
+                            <div style="height: 60vh; overflow:hidden;" class="center w-100">
+                              <img src="<?php echo "../image_news/" . $img2['cover'];  ?>" class="d-block w-100">
                             </div>
-                        </div>
+                              <div class="carousel-caption d-none d-md-block" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
+                                <h5><?php echo $img2['title'] ;?></h5>
+                                <p><?php echo $img2['description'] ;?></p>
+                              </div>
+                          </div>
+                        </a>
                       </div>
                       <?php } ?>
                     <?php if($img3 != null) { ?>
 
                       <div class="carousel-item ">
-                        <div class="d-flex justify-content-center align-item-center">
-                          <div style="height: 60vh; overflow:hidden;" class="center w-100">
-                            <img src="<?php echo "../image_news/" . $img3['cover'] ;  ?>" class="d-block w-100">
-                          </div>
-                            <div class="carousel-caption d-none d-md-block" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
-                              <h5><?php echo $img3['title'] ;?></h5>
-                              <p><?php echo $img3['description'] ;?></p>
+                        <a href="../news_html/<?php echo $img3['html'].".php"  ;?> ">
+                          <div class="d-flex justify-content-center align-item-center">
+                            <div style="height: 60vh; overflow:hidden;" class="center w-100">
+                              <img src="<?php echo "../image_news/" . $img3['cover'] ;  ?>" class="d-block w-100">
                             </div>
-                        </div>
+                              <div class="carousel-caption d-none d-md-block" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
+                                <h5><?php echo $img3['title'] ;?></h5>
+                                <p><?php echo $img3['description'] ;?></p>
+                              </div>
+                          </div>
+                        </a>
                       </div>
                      
                       </div>
                     </div>
                     <?php } ?>
-                    
-                    <button class="carousel-control-prev bg-dark" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev" style="height: 60vh; margin-top:100px ;">
+                    <button class="carousel-control-prev bg-dark" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev" style="height: 60vh;">
                       <span class="carousel-control-prev-icon" aria-hidden="true" ></span>
                       <span class="visually-hidden" >Previous</span>
                     </button>
-                    <button class="carousel-control-next bg-dark" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next" style="height: 60vh; margin-top:100px ;">
+                    <button class="carousel-control-next bg-dark" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next" style="height: 60vh;">
                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
                       <span class="visually-hidden">Next</span>
                     </button>
