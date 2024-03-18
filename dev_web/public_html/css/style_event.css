@@ -87,7 +87,19 @@ dd{
 }
 .carousel .list .item .buttons button:nth-child(2):hover {
     background-color: #fff;
-    color: #000000;
+    color: #ffffff;
+}
+
+.carousel .list .item .buttons  a{
+    color: #000;
+   letter-spacing: 3px;
+   font-family: Poppins;
+   font-weight: 500;
+   text-decoration: none;
+}
+.carousel .list .item .buttons a:hover{
+   
+    color: white;
 }
 /* thumbail */
 .thumbnail{

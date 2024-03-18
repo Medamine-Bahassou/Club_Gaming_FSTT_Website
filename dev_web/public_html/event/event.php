@@ -37,12 +37,12 @@ $result = $requet->fetchAll(PDO::FETCH_OBJ);
 <body class="bg-dark">
 
 
-    
+
     <!-- carousel -->
     <div class="carousel container-fluid" style=" height:100vh; margin:0;">
-    <?php
+        <?php
         include '../navbar/navbar.php';
-    ?>
+        ?>
         <!-- list item -->
         <div class="list">
             <?php
@@ -60,8 +60,7 @@ $result = $requet->fetchAll(PDO::FETCH_OBJ);
 
                         </div>
                         <div class="buttons">
-                            <button class="rounded-pill">SEE MORE</button>
-                            <button class="rounded-pill">SUBSCRIBE</button>
+                            <button class="rounded-pill"><a class="rounded-pill" href="participer_event.php?id_event=<?php echo $event->id; ?>">SUBSCRIBE</a></button>
                         </div>
                     </div>
                 </div>
