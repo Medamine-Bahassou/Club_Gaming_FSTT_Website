@@ -56,7 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["ok"])) {
     $tele = $_POST["tele"];
     $verification_code = bin2hex(random_bytes(16));
     $code = 0;
-
+    $currentYear = date('Y');
+    $inputYear = date('Y', strtotime($date_naissance));
 
     // $mail = new PHPMailer(true);
     // $mail->isSMTP();
@@ -93,6 +94,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["ok"])) {
     $count = $email_check->fetchColumn();
     if ($count > 0) {
         $emailexit = "Email  exists";
+    } else if (($currentYear - $inputYear) < 12) {
+        $emailexit = "you are <13";
     } else {
 
         if (!empty($image)) {
