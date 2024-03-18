@@ -121,3 +121,13 @@ const highlighterRemover = (className) => {
 
 window.onload = initializer();
 
+
+////////
+
+var html ; 
+
+document.getElementById("submit-btn").addEventListener("click", function(event) {
+  
+  html 
+
+});
