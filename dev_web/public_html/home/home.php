@@ -1,4 +1,28 @@
 <html lang="en">
+  <style>
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: lightyellow;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: lightblue;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: lightseagreen;
+}
+
+
+
+  </style>
 
 <head>
   <title>Club Gaming </title>
@@ -247,6 +271,7 @@
             <!-- fin slide -->
           </div>
         </div>
+      </div>
       </div>
 
 

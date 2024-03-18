@@ -1,53 +1,53 @@
 <?php
-include('includes/header.php');
-include('includes/navbar.php');
+include('includes/header.php'); 
+include('includes/navbar.php'); 
 ?>
 
 
 <?php
 
-//bdd
-include '../bdd/utilisateur.php';
+    //bdd
+    include '../bdd/utilisateur.php';
 
 
 
-if (isset($_POST['submit'])) {
-    $type = $_POST['type'];
-    $name = $_POST['name'];
-    $nombre = $_POST['nombre'];
-    $description = $_POST['discription']; // Corrected variable name
-    // $img = $_POST['img']; // You might want to handle image upload separately 
-    $image = "";
-    if (isset($_FILES['image'])) {
-        $image = $_FILES['image']['name'];
-        $fileName = uniqid() . $image;
-        move_uploaded_file($_FILES['image']['tmp_name'], '../image_event/' . $fileName);
-    }
-
-
-
-    if (!empty($type) && !empty($name) && !empty($nombre) && !empty($description)) {
-
-
-        $requete = $conn->prepare("INSERT INTO event (type, name, nombre, description,image) VALUES (:type, :name, :nombre, :description,:image)"); // Removed extra comma
-        $requete->bindParam(':type', $type);
-        $requete->bindParam(':name', $name);
-        $requete->bindParam(':nombre', $nombre);
-        $requete->bindParam(':description', $description); // Corrected variable name
-        $requete->bindParam(':image', $fileName); // 
-        try {
-            $requete->execute();
-            echo "Data inserted successfully."; // Changed the message for clarity
-
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
+    if (isset($_POST['submit'])) {
+        $type = $_POST['type'];
+        $name = $_POST['name'];
+        $nombre = $_POST['nombre'];
+        $description = $_POST['discription']; // Corrected variable name
+        // $img = $_POST['img']; // You might want to handle image upload separately 
+        $image = "";
+        if (isset($_FILES['image'])) {
+            $image = $_FILES['image']['name'];
+            $fileName = uniqid() . $image;
+            move_uploaded_file($_FILES['image']['tmp_name'], '../image_event/' . $fileName);
         }
-    } else {
-        echo "All fields are required.";
-    }
-}
 
-?>
+
+
+        if (!empty($type) && !empty($name) && !empty($nombre) && !empty($description)) {
+
+
+            $requete = $conn->prepare("INSERT INTO event (type, name, nombre, description,image) VALUES (:type, :name, :nombre, :description,:image)"); // Removed extra comma
+            $requete->bindParam(':type', $type);
+            $requete->bindParam(':name', $name);
+            $requete->bindParam(':nombre', $nombre);
+            $requete->bindParam(':description', $description); // Corrected variable name
+            $requete->bindParam(':image', $fileName); // 
+            try {
+                $requete->execute();
+                echo "Data inserted successfully."; // Changed the message for clarity
+
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
+        } else {
+            echo "All fields are required.";
+        }
+    }
+
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,52 +57,71 @@ if (isset($_POST['submit'])) {
     <title>admin</title>
     <link rel="stylesheet" href="../../../bootstrap-5.3.3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
 
+<div class="list-group" id="list-tab" role="tablist">
+        <div class="row px-5">
+            <a class="list-group-item list-group-item-action active col-6 rounded" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">Add Event</a>
+            <a class="list-group-item list-group-item-action col-6 rounded" id="list-profile-list" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">List Events</a>
+        </div>
+    
 
-    <div class="container">
-        <h1>Add Event</h1>
-        <!-- debut form -->
-        <form method="post" enctype="multipart/form-data" class="g-3">
+    </div>
+    <div class="">
+        <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active " id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+            <div class="container p-5">
+    
+            <!-- add news -->
+            <h1>Add Event</h1>
+            <!-- debut form -->
+            <form method="post" enctype="multipart/form-data" class="g-3">
             <br>
-            <label for="formFile" class="form-label" style="font-weight: bold;">Data</label>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingInput" placeholder="Type" name="type">
-            </div>
-            <div class="form-floating mb-3">
-                <input name="name" type="text" class="form-control" placeholder="Name" id="floatingInput">
+                <label for="formFile" class="form-label" style="font-weight: bold;">Data</label>     
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Type" name="type">
+                </div>
+                <div class="form-floating mb-3">
+                    <input name="name" type="text" class="form-control" placeholder="Name" id="floatingInput">
 
-            </div>
-            <div class="form-floating mb-3 ">
-                <input name="nombre" type="text" class="form-control" placeholder="Nomber of days" id="floatingInput">
-            </div>
-            <label style="font-weight: bold;">Description</label>
-            <div class="mb-3">
-                <textarea name="discription" class="form-control" placeholder="The first Event of the faculty of science ..." id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="form-floating mb-3 ">
+                    <input name="nombre" type="text" class="form-control" placeholder="Nomber of days" id="floatingInput">
+                </div>
+                <label style="font-weight: bold;">Description</label>     
+                <div class="mb-3">
+                    <textarea name="discription" class="form-control" placeholder="The first Event of the faculty of science ..." id="exampleFormControlTextarea1" rows="3"></textarea>
 
+                </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label" style="font-weight: bold;">Image</label>     
+                    <input name="image" class="form-control" type="file" id="formFile">
+
+                </div>
+                <input type="submit" name="submit" value="Valider" class="btn btn-success w-25 mx-2">
+
+            </form>
             </div>
-            <div class="mb-3">
-                <label for="formFile" class="form-label" style="font-weight: bold;">Image</label>
-                <input name="image" class="form-control" type="file" id="formFile">
 
-            </div>
-            <input type="submit" name="submit" value="Valider" class="btn btn-success w-25 mx-2">
+        </div>
 
-        </form>
 
-        <!-- fin form -->
+        <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+        <!-- list news -->
 
         <div id="list-event" class="mt-5 card p-5">
             <h3 class="mb-5 display-4">List of events</h3>
-            <table class="table table-bordered">
+            <table class="table table-striped table-hover border">
                 <thead>
                     <tr>
                         <th>Id</th>
                         <th>Type</th>
                         <th>Name</th>
-                        <th>Nomber of players</th>
+                        <th>Nomber of days</th>
                         <th>Options</th>
                     </tr>
                 </thead>
@@ -137,15 +156,23 @@ if (isset($_POST['submit'])) {
                     ?>
                 </tbody>
             </table>
+    </div>
+
+
+        </div>
         </div>
     </div>
+
+    <!-- fin form -->
+
+</div>
 </body>
 
 </html>
 
 
 
-<?php
+  <?php
 include('includes/scripts.php');
 include('includes/footer.php');
 ?>
