@@ -30,7 +30,7 @@ function sendMail($email, $v_code_)
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
         $mail->Subject = 'email verification from Fst Game';
-        $mail->Body    = "click the link to active your account <a href='http://localhost/webfinafinal/Club_Gaming_FSTT_Website/dev_web/public_html/logins/verification_email.php?email=$email&v_code=$v_code_'>verifiy</a>";
+        $mail->Body    = "click the link to active your account <a href='http://localhost:8080/website/dev_web/public_html/logins/verification_email.php?email=$email&v_code=$v_code_'>verifiy</a>";
 
         $mail->send();
         echo "<script> alert('Sent successfully') </script>";
@@ -56,8 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["ok"])) {
     $tele = $_POST["tele"];
     $verification_code = bin2hex(random_bytes(16));
     $code = 0;
-    $currentYear = date('Y');
-    $inputYear = date('Y', strtotime($date_naissance));
+
 
     // $mail = new PHPMailer(true);
     // $mail->isSMTP();
@@ -94,8 +93,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["ok"])) {
     $count = $email_check->fetchColumn();
     if ($count > 0) {
         $emailexit = "Email  exists";
-    } else if (($currentYear - $inputYear) < 12) {
-        $emailexit = "you are <13";
     } else {
 
         if (!empty($image)) {
