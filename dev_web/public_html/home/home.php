@@ -82,7 +82,7 @@
           <h1 class="ten title">About</h1>
           <div class="row">
             <!-- txt -->
-            <div class="col-md-6 d-flex justify-content-center align-items-center h-100 mt-5 mb-5 box">
+            <div id="carte" class="col-md-6 d-flex justify-content-center align-items-center h-100 mt-5 mb-5 box">
               <div class="card bg-transparent mx-5 rounded-5 border border-light d-flex justify-content-center align-items-center">
                 <div class="card-body d-inline-block ">
                   <h5 class="card-title text text-warning display-5 pixel">AFSTET</h5>
