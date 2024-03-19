@@ -11,6 +11,7 @@ $admin = $conn->prepare("SELECT * FROM admin ");
 $admin->execute();
 $admins = $admin->fetchAll(PDO::FETCH_ASSOC);
 
+
 if (isset($_POST["registerbtn"])) {
   $nom = $_POST['username'];
   $prenom = $_POST['prenom'];
@@ -63,6 +64,16 @@ if (isset($_POST["registerbtn"])) {
 
 ?>
 
+<!-- <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="get" action="register.php">
+  <div class="input-group">
+    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" name="searchInput">
+    <div class="input-group-append">
+      <button class="btn btn-primary" type="submit" name="search">
+        <i class="fas fa-search fa-sm"></i>
+      </button>
+    </div>
+  </div>
+</form> -->
 
 <div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -141,29 +152,62 @@ if (isset($_POST["registerbtn"])) {
 
             <?php
 
-            foreach ($admins as $value) {
+            if (isset($_GET['search']) && isset($_GET['searchInput']) && !empty($_GET['searchInput'])) {
+              $recherche = htmlspecialchars($_GET['searchInput']);
+              $searchPattern = "%$recherche%";
+              $search = $conn->prepare('SELECT * FROM admin WHERE nom LIKE :recherche OR prenom LIKE :recherche');
+              $search->bindParam(':recherche', $searchPattern, PDO::PARAM_STR);
+              $search->execute();
+              $searchResults = $search->fetchAll(PDO::FETCH_ASSOC);
+              foreach ($searchResults as $value) {
             ?>
-              <tr>
-                <td> <?php echo $value['id'] ?> </td>
-                <td><?php echo $value['nom'] . " " . $value['prenom'] ?></td>
-                <td><?php echo $value['email'] ?> </td>
-                <td type="password"> <?php echo $value['password'] ?> </td>
-                <td>
-                  <form action="" method="post">
-                    <input type="hidden" name="edit_id" value="">
-                    <a class="btn btn-success" href="modification_admin_list.php?id=<?php echo $value['id'] ?>">EDIT</a>
-                  </form>
-                </td>
-                <td>
-                  <form action="" method="post">
-                    <input type="hidden" name="delete_id" value="">
-                    <a class="btn btn-danger" href="suprimer_admin_list.php?id=<?php echo $value['id'] ?>">DELETE</a>
+                <tr>
+                  <td> <?php echo $value['id'] ?> </td>
+                  <td><?php echo $value['nom'] . " " . $value['prenom'] ?></td>
+                  <td><?php echo $value['email'] ?> </td>
+                  <td type="password"> <?php echo $value['password'] ?> </td>
+                  <td>
+                    <form action="" method="post">
+                      <input type="hidden" name="edit_id" value="">
+                      <a class="btn btn-success" href="modification_admin_list.php?id=<?php echo $value['id'] ?>">EDIT</a>
+                    </form>
+                  </td>
+                  <td>
+                    <form action="" method="post">
+                      <input type="hidden" name="delete_id" value="">
+                      <a class="btn btn-danger" href="suprimer_admin_list.php?id=<?php echo $value['id'] ?>">DELETE</a>
 
-                  </form>
-                </td>
-              </tr>
+                    </form>
+                  </td>
+                </tr>
+              <?php
+              }
+            } else {
+              foreach ($admins as $value) {
+              ?>
+                <tr>
+                  <td> <?php echo $value['id'] ?> </td>
+                  <td><?php echo $value['nom'] . " " . $value['prenom'] ?></td>
+                  <td><?php echo $value['email'] ?> </td>
+                  <td type="password"> <?php echo $value['password'] ?> </td>
+                  <td>
+                    <form action="" method="post">
+                      <input type="hidden" name="edit_id" value="">
+                      <a class="btn btn-success" href="modification_admin_list.php?id=<?php echo $value['id'] ?>">EDIT</a>
+                    </form>
+                  </td>
+                  <td>
+                    <form action="" method="post">
+                      <input type="hidden" name="delete_id" value="">
+                      <a class="btn btn-danger" href="suprimer_admin_list.php?id=<?php echo $value['id'] ?>">DELETE</a>
+
+                    </form>
+                  </td>
+                </tr>
             <?php
+              }
             }
+
             ?>
 
 
