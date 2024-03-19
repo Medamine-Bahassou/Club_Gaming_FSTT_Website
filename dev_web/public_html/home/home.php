@@ -218,42 +218,49 @@
                 <div class="carousel-inner bg-dark  shadow  mb-5 rounded-5" style="height:500px;">
                 <?php if($img1 != null) { ?>
                       <div class="carousel-item active">
-                        <div class="d-flex justify-content-center align-item-center h-100">
-                            <div style="height: 100%; overflow:hidden; " class="center w-100">
-                            <img src="<?php echo "../image_news/" . $img1['cover'] ;  ?>" class="d-block  h-100">
-                            </div>
-                            <div class="carousel-caption d-none d-md-block" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
-                              <h5 ><?php echo $img1['title'] ;?></h5>
-                              <p><?php echo $img1['description'] ;?></p>
-                            </div>
-                        </div>
+                        <a href="../news_html/<?php echo $img1['html'].".php"  ;?> ">
+                          <div class="d-flex justify-content-center align-item-center h-100">
+                              <div style="height: 100%; overflow:hidden; " class="center w-100">
+                              <img src="<?php echo "../image_news/" . $img1['cover'] ;  ?>" class="d-block  h-100">
+                              </div>
+                              <div class="carousel-caption d-none d-md-block" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
+                                <h5 ><?php echo $img1['title'] ;?></h5>
+                                <p><?php echo $img1['description'] ;?></p>
+                              </div>
+                          </div>
+                        </a>
                       </div>
                       <?php } ?>
                     <?php if($img2 != null) { ?>
                       <div class="carousel-item ">
-                        <div class="d-flex justify-content-center align-item-center h-100">
-                          <div style="height:  100%; overflow:hidden;" class="center w-100">
-                            <img src="<?php echo "../image_news/" . $img2['cover'];  ?>" class="d-block h-100">
-                          </div>
-                            <div class="carousel-caption d-none d-md-block mw-100" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
-                              <h5><?php echo $img2['title'] ;?></h5>
-                              <p><?php echo $img2['description'] ;?></p>
+                        <a href="../news_html/<?php echo $img2['html'].".php"  ;?> ">
+                          <div class="d-flex justify-content-center align-item-center h-100">
+                            <div style="height:  100%; overflow:hidden;" class="center w-100">
+                              <img src="<?php echo "../image_news/" . $img2['cover'];  ?>" class="d-block h-100">
                             </div>
-                        </div>
+                              <div class="carousel-caption d-none d-md-block mw-100" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
+                                <h5><?php echo $img2['title'] ;?></h5>
+                                <p><?php echo $img2['description'] ;?></p>
+                              </div>
+                          </div>
+                        </a>
                       </div>
                       <?php } ?>
                     <?php if($img3 != null) { ?>
-
+                      
                       <div class="carousel-item ">
-                        <div class="d-flex justify-content-center align-item-center h-100">
-                          <div style="height:  100%; overflow:hidden;" class="center w-100">
-                            <img src="<?php echo "../image_news/" . $img3['cover'] ;  ?>" class="d-block h-100" >
-                          </div>
-                            <div class="carousel-caption d-none d-md-block" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
-                              <h5 ><?php echo $img3['title'] ;?></h5>
-                              <p><?php echo $img3['description'] ;?></p>
+                        <a href="../news_html/<?php echo $img3['html'].".php"  ;?> ">
+
+                          <div class="d-flex justify-content-center align-item-center h-100">
+                            <div style="height:  100%; overflow:hidden;" class="center w-100">
+                              <img src="<?php echo "../image_news/" . $img3['cover'] ;  ?>" class="d-block h-100" >
                             </div>
-                        </div>
+                              <div class="carousel-caption d-none d-md-block" style="text-shadow: 2px 2px black; background-color: rgba(59, 59, 59, 0.425); box-shadow: 0 0 20px 20px rgba(59, 59, 59, 0.425) ;">
+                                <h5 ><?php echo $img3['title'] ;?></h5>
+                                <p><?php echo $img3['description'] ;?></p>
+                              </div>
+                          </div>
+                        </a>
                       </div>
                 </div>
                 <?php } ?>

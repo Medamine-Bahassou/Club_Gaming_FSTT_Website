@@ -1,5 +1,6 @@
 <?php
   //includes
+  include './includes/condition_login.php'; 
   include '../bdd/utilisateur.php';
   include('includes/header.php'); 
   include('includes/navbar.php'); 

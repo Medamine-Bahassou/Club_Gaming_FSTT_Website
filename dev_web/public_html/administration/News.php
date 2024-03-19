@@ -1,5 +1,7 @@
 
 <?php
+    include './includes/condition_login.php'; 
+
     //bdd
     include '../bdd/utilisateur.php';
 

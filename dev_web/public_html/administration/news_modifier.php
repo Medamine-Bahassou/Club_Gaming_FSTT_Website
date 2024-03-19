@@ -1,4 +1,5 @@
 <?php
+include './includes/condition_login.php'; 
 
 
 include '../bdd/utilisateur.php';

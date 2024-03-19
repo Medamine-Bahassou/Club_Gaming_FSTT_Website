@@ -1,4 +1,5 @@
 <?php
+include './includes/condition_login.php'; 
 session_start();
 include '../bdd/utilisateur.php';
 $sqlState = $conn->prepare('SELECT * FROM admin WHERE id=?');
