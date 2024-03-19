@@ -10,6 +10,7 @@ $passerr = "";
 $admin = $conn->prepare("SELECT * FROM admin ");
 $admin->execute();
 $admins = $admin->fetchAll(PDO::FETCH_ASSOC);
+
 if (isset($_POST["registerbtn"])) {
   $nom = $_POST['username'];
   $prenom = $_POST['prenom'];
@@ -137,7 +138,9 @@ if (isset($_POST["registerbtn"])) {
             </tr>
           </thead>
           <tbody>
+
             <?php
+
             foreach ($admins as $value) {
             ?>
               <tr>
