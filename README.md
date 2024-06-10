@@ -1,6 +1,13 @@
 # AFSTET
 # Club Gaming FSTT Website
 
+![Club-Gaming-Google-Chrome-2024-06-10-17-22-44-ezgif com-crop](https://github.com/Medamine-Bahassou/Club_Gaming_FSTT_Website/assets/146652318/7ca0609a-8954-4cbd-81e5-313f0fce1e25)
+
+
+## Test 
+
+[Go to Website](https://medaminebh.000webhostapp.com/home/home.php)
+
 ## Description
 Le site web du Club Gaming de la FSTT est une plateforme développée en utilisant les technologies PHP, JavaScript, HTML/CSS. Ce site offre une gamme de fonctionnalités permettant de gérer les actualités, les événements, les administrateurs, ainsi que les comptes utilisateurs (connexion et inscription).
 
