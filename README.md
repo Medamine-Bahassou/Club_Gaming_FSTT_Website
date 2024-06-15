@@ -28,7 +28,7 @@ Le site web du Club Gaming de la FSTT est une plateforme développée en utilisa
 ## Technologies Utilisées
 - PHP
 - JavaScript
-- HTML/CSS
+- Bootstrap
 
 ## Installation
 1. Clonez le dépôt sur votre machine locale.
