@@ -1,3 +1,10 @@
+
+
+<div align="center"> 
+  <img src="https://github.com/user-attachments/assets/10fae585-f569-4381-8069-f19d6c737c28" width="250"/>
+</div>
+
+
 # AFSTET
 # Club Gaming FSTT Website
 
