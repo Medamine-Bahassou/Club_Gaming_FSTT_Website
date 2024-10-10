@@ -6,7 +6,7 @@
 
 
 # AFSTET
-# Club Gaming FSTT Website
+## Club Gaming FSTT Website
 
 ![Club-Gaming-Google-Chrome-2024-06-10-17-22-44-ezgif com-crop](https://github.com/Medamine-Bahassou/Club_Gaming_FSTT_Website/assets/146652318/7ca0609a-8954-4cbd-81e5-313f0fce1e25)
 
